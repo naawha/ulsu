@@ -1,0 +1,20 @@
+{% extends "main.html" %}
+
+{% block topmenu %}
+    <a href="{{ node.path }}edit/"><img alt="Компонент" ext:qtip="Добавить Компонент, дочерний к этому документу" src="http://www.ulsu.ru/components/com_dprtmnt/i/edit.png"/></a>
+
+
+{% endblock %}
+
+{% block content %}
+<div id="news">
+{% for n in node.get_news %}
+    <div class="novelty">
+    <h3>{{ n.title }}</h3>
+    <p>{{ n.text }}</p>
+    </div>
+{% empty %}
+    Новостей нет
+{% endfor %}
+</div>
+{% endblock %}

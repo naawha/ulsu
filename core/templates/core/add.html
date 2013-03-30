@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+{% block topmenu %}
+    <a href="{{ node.path }}"><img alt="Выход" qtip="Выйти без сохранения" src="http://www.ulsu.ru/components/com_dprtmnt/i/cancel.png"/></a>
+{% endblock %}
+
+{% block content %}
+{% for error in e %}
+{{ error }}<br />
+{% endfor %}
+<form method="POST" action="{{ node.path }}add/">
+{% csrf_token %}
+Тип: <select required name="type">
+    <option value=""></option>
+    {% for app in apps %}
+        <option{% if data.type.0 == app.type  %} selected{% endif %} value="{{ app.type }}">{{ app.name }}</option>
+    {% endfor %}
+</select><br />
+URL: <input required type="text"{% if data.node_name.0  %} value="{{ data.node_name.0 }}"{% endif %} name="node_name" /><br />
+Заголовок: <input required type="text"{% if data.title.0  %} value="{{ data.title.0 }}"{% endif %} name="title" />
+<input type="submit" value="Создать" />
+</form>
+{%  endblock %}
