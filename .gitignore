@@ -2,3 +2,5 @@
 manage.py
 ulsu/settings.py
 .idea
+deploy/
+files/

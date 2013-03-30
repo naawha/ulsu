@@ -4,8 +4,8 @@ from views import timetable_render
 import datetime
 
 
-class Module('InheritanceCastModel'):
-    node = models.ForeignKey('Node', blank=True, null=True)
+class Module('core.models.InheritanceCastModel'):
+    node = models.ForeignKey('core.models.Node', blank=True, null=True)
     title = models.CharField(max_length=255)
     display = models.BooleanField(default=False)
 
