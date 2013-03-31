@@ -4,3 +4,4 @@ ulsu/settings.py
 .idea
 deploy/
 files/
+*.db
