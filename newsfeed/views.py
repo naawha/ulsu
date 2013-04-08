@@ -11,6 +11,7 @@ def view(request, node):
     c = RequestContext(request, {'node': node})
     return HttpResponse(t.render(c))
 
+
 def edit(request, node):
     node.title = 'Редактирование новостей'
     t = loader.get_template("newsfeed/view.html")

@@ -1,0 +1,221 @@
+{% extends "admin/base_site.html" %}
+{%  load static %}
+{% get_static_prefix as STATIC_URL %}
+
+
+{% block extrahead %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jstree/jquery.jstree.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $("#demo")
+                .bind("before.jstree", function (e, data) {
+                    $("#alog").append(data.func + "<br />");
+                })
+                .jstree({
+                    // List of active plugins
+                    "plugins" : [
+                        "themes","json_data","ui","crrm","dnd","search","types","contextmenu"
+                    ],
+
+                    "json_data" :{
+                        "ajax" : {
+                            "url" : "/admin/core/node/",
+                            "method": "POST",
+                            "data" : {'task': 'ajax_tree'}
+                        }
+                    },
+                    // Configuring the search plugin
+                    "contextmenu":{
+
+                    },
+
+                    "search" : {
+                        // As this has been a common question - async search
+                        // Same as above - the `ajax` config option is actually jQuery's AJAX object
+                        "ajax" : {
+                            "url" : "/static/v.1.0pre/_demo/server.php",
+                            // You get the search string as a parameter
+                            "data" : function (str) {
+                                return {
+                                    "operation" : "search",
+                                    "search_str" : str
+                                };
+                            }
+                        }
+                    },
+                    "types" : {
+                        "max_depth" : -2,
+                        "max_children" : -2,
+                        "valid_children" : [ "root" ],
+                        "types" : {
+
+                            "default" : {
+                                "valid_children" : [ "department", "default", "newsfeed" ],
+                                "icon" : {
+                                    "image" : "{{ STATIC_URL }}img/jstree/department.png"
+                                }
+                            },
+
+                            "department" : {
+                                "valid_children" : [ "department", "default", "newsfeed" ],
+                                "icon" : {
+                                    "image" : "{{ STATIC_URL }}img/jstree/department.png"
+                                }
+                            },
+
+                            "newsfeed" : {
+                                "valid_children" : [ "department", "default", "newsfeed" ],
+                                "icon" : {
+                                    "image" : "{{ STATIC_URL }}img/jstree/news.png"
+                                }
+                            },
+
+                            "root" : {
+                                "valid_children" : [ "default", "department", "newsfeed" ],
+                                "icon" : {
+                                    "image" : "{{ STATIC_URL }}img/jstree/root.png"
+                                },
+                                "start_drag" : false,
+                                "move_node" : false,
+                                "delete_node" : false,
+                                "remove" : false
+                            }
+                        }
+                    },
+                    // UI & core - the nodes to initially select and open will be overwritten by the cookie plugin
+
+                    // the UI plugin - it handles selecting/deselecting/hovering nodes
+                    "ui" : {
+                        // this makes the node with ID node_4 selected onload
+                        "initially_select" : [ "node_4" ]
+                    },
+                    // the core plugin - not many options here
+                    "core" : {
+                        // just open those two nodes up
+                        // as this is an AJAX enabled tree, both will be downloaded from the server
+                        "initially_open" : [ "node_2" , "node_3" ]
+                    }
+                })
+                .bind("create.jstree", function (e, data) {
+                    console.log(data);
+                    $.post(
+                            "/static/v.1.0pre/_demo/server.php",
+                            {
+                                "operation" : "create_node",
+                                "id" : data.rslt.parent.attr("id").replace("node_",""),
+                                "position" : data.rslt.position,
+                                "title" : data.rslt.name,
+                                "type" : data.rslt.obj.attr("rel")
+                            },
+                            function (r) {
+                                if(r.status) {
+                                    $(data.rslt.obj).attr("id", "node_" + r.id);
+                                }
+                                else {
+                                    $.jstree.rollback(data.rlbk);
+                                }
+                            }
+                    );
+                })
+                .bind("remove.jstree", function (e, data) {
+                    console.log([e,data]);
+                    /*data.rslt.obj.each(function () {
+                        $.ajax({
+                            async : false,
+                            type: 'POST',
+                            url: "/static/v.1.0pre/_demo/server.php",
+                            data : {
+                                "operation" : "remove_node",
+                                "id" : this.id.replace("node_","")
+                            },
+                            success : function (r) {
+                                if(!r.status) {
+                                    data.inst.refresh();
+                                }
+                            }
+                        });
+                    });*/
+                })
+                .bind("rename.jstree", function (e, data) {
+                    $.post(
+                            "/static/v.1.0pre/_demo/server.php",
+                            {
+                                "operation" : "rename_node",
+                                "id" : data.rslt.obj.attr("id").replace("node_",""),
+                                "title" : data.rslt.new_name
+                            },
+                            function (r) {
+                                if(!r.status) {
+                                    $.jstree.rollback(data.rlbk);
+                                }
+                            }
+                    );
+                })
+                .bind("move_node.jstree", function (e, data) {
+                    console.log([e, data]);
+                    data.rslt.o.each(function (i) {
+                        $.ajax({
+                            async : false,
+                            type: 'POST',
+                            url: "/static/v.1.0pre/_demo/server.php",
+                            data : {
+                                "operation" : "move_node",
+                                "id" : $(this).attr("id").replace("node_",""),
+                                "ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_",""),
+                                "position" : data.rslt.cp + i,
+                                "title" : data.rslt.name,
+                                "copy" : data.rslt.cy ? 1 : 0
+                            },
+                            success : function (r) {
+                                if(!r.status) {
+                                    $.jstree.rollback(data.rlbk);
+                                }
+                                else {
+                                    $(data.rslt.oc).attr("id", "node_" + r.id);
+                                    if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+                                        data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+                                    }
+                                }
+                                $("#analyze").click();
+                            }
+                        });
+                    });
+                });
+
+    });
+
+
+</script>
+{% endblock %}
+
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/jstree/themes/default/style.css" />
+{% endblock %}
+
+
+{% block content %}
+sdsd
+    <div id="demo" class="demo" style="height:100px;">
+        <ul>
+            <li id="phtml_1">
+                <a href="#">Root node 1</a>
+                <ul>
+                    <li id="phtml_2">
+                        <a href="#">Child node 1</a>
+                    </li>
+                    <li id="phtml_3">
+                        <a href="#">Child node 2</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="phtml_4">
+                <a href="#">Root node 2</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+

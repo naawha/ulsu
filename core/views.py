@@ -3,9 +3,11 @@ from django.template import loader, Context, RequestContext, Template
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 from models import *
 from django.conf import settings
 import re
+import json
 for i in settings.CUSTOM_APPS:
     exec 'from ' + i['type'] + ' import urls as ' + i['type'] + '_urls, models as ' + i['type'] + '_models'
 
@@ -78,6 +80,34 @@ def add(request, node):
     })
     return HttpResponse(t.render(c))
 
+
+
+def branch(parent=None):
+    leafs = Node.objects.filter(parent=parent)
+    if leafs:
+        a = []
+        for l in leafs:
+            o = {'name': l.node_name, 'data': l.title, 'attr': {'id': 'node_' + str(l.id)}}
+            o['attr']['rel'] = l.real_type.name if parent != None else 'root'
+            b = branch(l)
+            if b is not None:
+                o['children'] = b
+            a.append(o)
+        return a
+    else:
+        return None
+
+
+
+
+@csrf_exempt
+def node_tree(request):
+    if request.method == 'POST':
+        return HttpResponse(json.dumps(branch()))
+
+    t = loader.get_template("admin/node_tree.html")
+    c = RequestContext(request, {'title': 'Редактирование дерева', 'app_label': 'core', 'node': request})
+    return HttpResponse(t.render(c))
 
 custom = (
     (re.compile(r'^add$'), add, 'add'),
