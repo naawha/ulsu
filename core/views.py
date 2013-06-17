@@ -12,7 +12,7 @@ for i in settings.CUSTOM_APPS:
     exec 'from ' + i['type'] + ' import urls as ' + i['type'] + '_urls, models as ' + i['type'] + '_models'
 
 
-index_node = Node.objects.get(parent=None)
+index_node = Node.objects.filter(parent=None)[:1]
 
 
 def main_page(request):
@@ -25,6 +25,7 @@ def main_page(request):
 
 def recousive_check(chunks, parent=index_node):
     try:
+        pass
         node = Node.objects.get(node_name=chunks[0], parent=parent)
     except Node.DoesNotExist:
         return parent, '/'.join(chunks)
@@ -59,6 +60,7 @@ def add(request, node):
                 n.node_name = request.POST['node_name']
                 n.title = request.POST['title']
                 n.parent = node
+                n.creator = request.user
                 n.save()
                 return redirect(n.path() + 'edit')
             else:

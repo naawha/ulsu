@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block topmenu %}
+    <a href="{{ node.path }}"><img ext:qtip="Сохранить и перейти к просмотру страницы" alt="сохранить" src="http://www.ulsu.ru/components/com_dprtmnt/i/save.png"></a>
+    <a href="{{ node.path }}"><img alt="Выход" ext:qtip="Выйти без сохранения" src="http://www.ulsu.ru/components/com_dprtmnt/i/cancel.png"/></a>
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="text">
+        <form method="POST" action="{{ node }}edit/">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+            <input type="checkbox" name="show_rightmenu" value="TRUE">Показывать правое меню<br />
+            Заголовок
+            <input id="inp_ttl" type="text" ext:qtip="Название раздела" value="{{ node.head }}" size="70" name="head"><br />
+            Не отображать в меню
+            <input type="checkbox" name="status" value="TRUE"><br />
+            <textarea name="text" id="editor">
+                {{ node.text }}
+            </textarea>
+            <script type="text/javascript">
+                CKEDITOR.replace('editor',
+                        {
+                            skin : 'django'
+                        });
+            </script>
+            <input type="submit" value="применить" ext:qtip="Применить — сохранить и остаться на странице редактирования"/>
+        </form>
+    </div>
+
+{% endblock %}

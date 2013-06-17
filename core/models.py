@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 
 
 class InheritanceCastModel(models.Model):
@@ -69,10 +70,13 @@ class TimetableAdmin(admin.ModelAdmin):
 admin.site.register(Timetable, TimetableAdmin)
 
 
+
+
 class Node(InheritanceCastModel):
     parent = models.ForeignKey('Node', blank=True, null=True)
     node_name = models.CharField(max_length=30)
     title = models.CharField(max_length=255)
+    creator = models.ForeignKey(User)
 
     def path(self):
         if self.parent is not None:

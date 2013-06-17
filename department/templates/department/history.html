@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block topmenu %}
+    <a href="{{ node.path }}"><img ext:qtip="Сохранить и перейти к просмотру страницы" alt="сохранить" src="http://www.ulsu.ru/components/com_dprtmnt/i/save.png"></a>
+    <a href="{{ node.path }}"><img alt="Выход" ext:qtip="Выйти без сохранения" src="http://www.ulsu.ru/components/com_dprtmnt/i/cancel.png"/></a>
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="text">
+    {% for a in list %}
+        {{a.user }}{{ a.date }}<br />
+    {% endfor %}
+    </div>
+
+{% endblock %}
