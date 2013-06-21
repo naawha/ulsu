@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | УлГУ{% endblock %}
+
+{% block extrastyle %}
+<style type="text/css">
+    #header{
+        background-color: #1953AF;
+    }
+
+    #site-name{
+        color: #fff !important;
+    }
+</style>
+{% block css %}{% endblock %}
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">УлГУ</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
