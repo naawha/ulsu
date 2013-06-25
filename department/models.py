@@ -15,10 +15,10 @@ def get_node():
 
 
 class Department(Node):
-    show_rightmenu = models.BooleanField()
-    rightmenu = models.TextField(null=True, blank=True)
-    status = models.BooleanField()
-    text = RichTextField(null=True, blank=True)
+    show_rightmenu = models.BooleanField(verbose_name='Отображать правое меню', help_text='В правом меню перечислены дочерние страницы')
+    rightmenu = models.TextField(null=True, blank=True, verbose_name='Содержимое правого меню', help_text='Если поле пустое, правое меню сгенерируется автоматически')
+    status = models.BooleanField(verbose_name='Скрыть страницу')
+    text = RichTextField(null=True, blank=True, verbose_name='Содержимое страницы')
 
     def style_rightmenu(self):
         if self.show_rightmenu:
@@ -33,13 +33,17 @@ class Department(Node):
             return ''
 
     def save(self, user, *args, **kwagrs):
-        super(Department, self).save(*args, **kwagrs)
+        super(Department, self).save(user, *args, **kwagrs)
         if self.text:
             h = History()
             h.node = self
             h.page = self.text
             h.user = user
             h.save()
+
+    class Meta:
+        verbose_name='Департамент'
+        verbose_name_plural='Департаменты'
 
 
 class DepartmentAdmin(admin.ModelAdmin):
@@ -50,10 +54,10 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 class History(models.Model):
-    user = models.ForeignKey(User)
-    node = models.ForeignKey(Department)
-    page = PassiveHTMLField(null=True, blank=True)
-    date = models.DateTimeField(default=datetime.now())
+    user = models.ForeignKey(User, verbose_name='Пользователь', help_text='Пользователь, который внёс изменения')
+    node = models.ForeignKey(Department, verbose_name='Департамент', help_text='Текущий адрес изменённого департамента')
+    page = PassiveHTMLField(null=True, blank=True, verbose_name='Содержимое страницы')
+    date = models.DateTimeField(default=datetime.now(), verbose_name='Дата изменения')
 
     def safe_text(self):
         return mark_safe(self.page)
@@ -61,6 +65,9 @@ class History(models.Model):
     def path(self):
         return self.node.path()
 
+    class Meta:
+        verbose_name='История'
+        verbose_name_plural='История'
 
 class HistoryAdmin(admin.ModelAdmin):
     list_display = ('path', 'date', 'user')
