@@ -5,4 +5,5 @@ urls = (
     (re.compile(r'^/$'), view, False),
     (re.compile(r'^edit$'), edit, False),
     (re.compile(r'^history$'), history, False),
+    (re.compile(r'^restore$'), restore, False),
 )

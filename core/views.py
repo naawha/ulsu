@@ -61,7 +61,7 @@ def add(request, node):
                 n.title = request.POST['title']
                 n.parent = node
                 n.creator = request.user
-                n.save()
+                n.save(request.user)
                 return redirect(n.path() + 'edit')
             else:
                 data = dict(request.POST)
