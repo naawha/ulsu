@@ -10,9 +10,29 @@
 
 {% block content %}
     <div class="text">
-    {% for a in list %}
-        {{a.user }}{{ a.date }}<br />
-    {% endfor %}
+        <div id="accordion2" class="accordion">
+        {% for a in list %}
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a href="#{{ a.id }}" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+                        <div style="float: left; width:100px; border-right: 1px solid #006dcc">{{a.user }}</div>
+                        <div style="margin-left: 20px;float:left;">{{ a.date }}</div>
+                        <div style="clear: both;"></div>
+                    </a>
+                </div>
+                <div class="accordion-body collapse" id="{{ a.id }}" style="height: 0px;">
+                    <div class="accordion-inner">
+                        {{ a.page|safe }}
+                        <div style="margin-right: 20px;float:right;">
+                            <a class="restore" href="{{ node.path }}restore/?id={{ a.id }}">Восстановить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
     </div>
+
 
 {% endblock %}
