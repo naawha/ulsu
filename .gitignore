@@ -1,6 +1,7 @@
 *.pyc
 manage.py
-ulsu/settings.py
+ulsu/private_settings.py
+ulsu/local_settings.py
 .idea
 deploy/
 files/
