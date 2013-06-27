@@ -1,0 +1,589 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Carousel Template &middot; Bootstrap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+<!-- Le styles -->
+<link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<style>
+{% comment %}
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+body {
+    padding-bottom: 40px;
+    color: #5a5a5a;
+    font-size: 12px;
+}
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    margin-top: 20px;
+    margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+}
+.navbar-wrapper .navbar {
+
+}
+
+    /* Remove border and change up box shadow for more contrast */
+.navbar .navbar-inner {
+    border: 0;
+    -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+    /* Downsize the brand/project name a bit */
+.navbar .brand {
+    padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+}
+
+    /* Navbar links: increase padding for taller navbar */
+.navbar .nav > li > a {
+    padding: 15px 20px;
+}
+
+    /* Offset the responsive button for proper vertical alignment */
+.navbar .btn-navbar {
+    margin-top: 10px;
+}
+
+
+
+    /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+.carousel {
+    margin-bottom: 60px;
+}
+
+.carousel .container {
+    position: relative;
+    z-index: 9;
+}
+
+.carousel-control {
+    height: 80px;
+    margin-top: 0;
+    font-size: 120px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    background-color: transparent;
+    border: 0;
+    z-index: 10;
+}
+
+.carousel .item {
+    height: 300px;
+}
+.carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
+}
+
+.carousel-caption {
+    background-color: transparent;
+    position: static;
+    max-width: 550px;
+    padding: 0 20px;
+    margin-top: 90px;
+}
+.carousel-caption h1,
+.carousel-caption .lead {
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel-caption .btn {
+    margin-top: 10px;
+}
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+.marketing .span4 {
+    text-align: center;
+}
+.marketing h2 {
+    font-weight: normal;
+}
+.marketing .span4 p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+    /* Featurettes
+    ------------------------- */
+
+.featurette-divider {
+    margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+.featurette {
+    padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+    overflow: hidden; /* Vertically center images part 2: clear their floats. */
+}
+.featurette-image {
+    margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+}
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+.featurette-image.pull-left {
+    margin-right: 40px;
+}
+.featurette-image.pull-right {
+    margin-left: 40px;
+}
+
+    /* Thin out the marketing headings */
+.featurette-heading {
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+@media (max-width: 979px) {
+
+    .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+    }
+    .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+    }
+
+    .carousel .item {
+        height: 500px;
+    }
+    .carousel img {
+        width: auto;
+        height: 500px;
+    }
+
+    .featurette {
+        height: auto;
+        padding: 0;
+    }
+    .featurette-image.pull-left,
+    .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .navbar-inner {
+        margin: -20px;
+    }
+
+    .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+    .carousel .container {
+
+    }
+    .carousel .item {
+        height: 300px;
+    }
+    .carousel img {
+        height: 300px;
+    }
+    .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-top: 100px;
+    }
+    .carousel-caption h1 {
+        font-size: 30px;
+    }
+    .carousel-caption .lead,
+    .carousel-caption .btn {
+        font-size: 18px;
+    }
+
+    .marketing .span4 + .span4 {
+        margin-top: 40px;
+    }
+
+    .featurette-heading {
+        font-size: 30px;
+    }
+    .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+    }{% endcomment %}
+    /* Sticky footer styles
+-------------------------------------------------- */
+    html,
+    body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+    }
+    /* Wrapper for page content to push down footer */
+    #wrap {
+        min-height: 100%;
+        height: auto !important;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+    }
+    /* Set the fixed height of the footer here */
+    #push,
+    #footer {
+        height: 60px;
+    }
+    #footer {
+        background-color: #f5f5f5;
+    }
+    /* Lastly, apply responsive CSS fixes as necessary */
+    @media (max-width: 767px) {
+        #footer {
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+    /* Custom page CSS
+    -------------------------------------------------- */
+    /* Not required for template or sticky footer method. */
+@media (max-width: 740px){
+    .modules{
+        float: none;
+    }
+}
+
+@media (min-width: 740px){
+    .modules{
+        float: right;
+    }
+}
+
+.container {
+        width: auto;
+        max-width: 1170px;
+    }
+.container .credit {
+        margin: 20px 0;
+    }
+.header{
+        min-height: 100px;
+        background: #2980b9;
+        padding: 0 25px;
+    }
+.logo{
+        float: left;
+        height: 60px;
+        font-size: 32px;
+        margin-top: 20px;
+        line-height: 60px;
+        color: #F7F7F7;
+    }
+.search_form{
+        float: right;
+        width: 260px;
+        margin-top: 30px;
+    }
+    .main-content{
+        width: 950px;
+        float: left !important;
+    }
+    .modules{
+        margin-left: 20px;
+        width: 200px;
+        word-wrap: break-word;
+        float: left !important;
+    }
+    .content{
+        padding: 0 25px;
+    }
+
+    .carousel{
+        max-width: 890px;
+    }
+
+
+
+@media (max-width: 980px) {
+    #myCarousel .carousel-caption {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 15px;
+        left: 0;
+        background: #333333;
+        background: rgba(0, 0, 0, 0.75);
+
+    }
+}
+@media (min-width: 980px) {
+    .carousel-caption {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 15px;
+        top: 0;
+        left: auto;
+        background: #333333;
+        background: rgba(0, 0, 0, 0.75);
+        max-width: 220px;
+    }
+}
+
+.modules-list{
+    margin: 0;
+}
+.modules-list li{
+    display: block;
+    width: 200px;
+    margin-bottom: 5px;
+}
+</style>
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="../assets/ico/favicon.png">
+</head>
+
+<body>
+
+
+
+<!-- NAVBAR
+================================================== -->
+<div id="wrap">
+    {% comment %}----------------HEADER-------------------{% endcomment %}
+        <div class="header">
+            <div class="container">
+                <div class="logo">
+                    Ульяновский государственный университет
+                </div>
+                <div class="search_form">
+                    <form class=" form-search">
+                        <div class="input-append">
+                            <input type="text" class="span2 search-query">
+                            <button class="btn" type="submit">Найти</button>
+                        </div>
+                    </form>
+                </div>
+                <div style="clear: both">
+                </div>
+            </div>
+        </div>
+    {% comment %}------------MENU----------------------------------{% endcomment %}
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="nav-collapse in collapse" style="height: auto;">
+                        <ul class="nav">
+                            <li class="active"><a href="#">Новости</a></li>
+                            <li><a href="#about">Студентам</a></li>
+                            <li><a href="#contact">Выпускникам</a></li>
+                            <li><a href="#contact">Сотрудникам</a></li>
+                            <li><a href="#contact">Подразделения</a></li>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Информация <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Об университете</a></li>
+                                    <li><a href="#">Образовательные программы</a></li>
+                                    <li><a href="#">Международное сотрудничество</a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Nav header</li>
+                                    <li><a href="#">Социальная политика</a></li>
+                                    <li><a href="#">Довузовское образование</a></li>
+                                    <li><a href="#">Система менеджмента качества </a></li>
+                                    <li><a href="#">Школы-партнёры</a></li>
+                                    <li><a href="#">Сотрудничество</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Обратная связь <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Гостевая книга</a></li>
+                                    <li><a href="#">Задать вопрос</a></li>
+                                    <li><a href="#">Контакты</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form pull-right">
+                            {% comment %}<button class="btn btn-mini" type="button">Войти</button>{% endcomment %}
+                            <a href="#" style="display: inline-block; margin-top: 10px; color: #F7F7F7;">Log in</a>
+                        </form>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+    {% comment %}---------------CONTENT-------------------------------{% endcomment %}
+        <div class="content">
+            <div class="container">
+                <div class="main-content">
+                    <div class="carousel slide" id="myCarousel">
+                        <ol class="carousel-indicators">
+                            <li class="" data-slide-to="0" data-target="#myCarousel"></li>
+                            <li data-slide-to="1" data-target="#myCarousel" class=""></li>
+                            <li data-slide-to="2" data-target="#myCarousel" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img alt="" class="carousel-image" src="{{ STATIC_URL }}img/slide1.jpg">
+                                <div class="carousel-caption">
+                                    <h4>First Thumbnail label</h4>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt="" class="carousel-image"  src="{{ STATIC_URL }}img/slide1.jpg">
+                                <div class="carousel-caption">
+                                    <h4>Second Thumbnail label</h4>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt="" class="carousel-image"  src="{{ STATIC_URL }}img/slide1.jpg">
+                                <div class="carousel-caption">
+                                    <h4>Third Thumbnail label</h4>
+                                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
+                        <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
+                    </div>
+                </div>
+                <div class="modules">
+                    <ul class="modules-list">
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/holidays/prkm.jpg" alt="УлГУ ТВ""></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/razvitie_ulsu.png" alt="УлГУ ТВ""></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/prog_stud_ulsu.png" alt="УлГУ ТВ""></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/ulsutv.png" alt="УлГУ ТВ""></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/holidays/reiting.gif" alt="УлГУ ТВ""></a></li>
+                    </ul>
+                </div>
+                <script>
+                    function redraw(){
+                        var width;
+                        var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                        if (w < 740) {
+                            width = $('.container').width();
+                        } else {
+                            width = $('.container').width()-$('.modules').width()-20;
+                        }
+                        $('.main-content').width(width);
+                    }
+
+                    redraw();
+
+                    $(window).on('resize', function(){
+                        redraw();
+                    });
+                </script>
+                <script>
+                    function redraw_carousel(){
+                        var width;
+                        var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                        if (w > 980) {
+                            width = $('#myCarousel').width()-250;
+                        } else {
+                            width = $('#myCarousel').width();
+                        }
+                        $('.carousel-image').width(width);
+                    }
+
+                    redraw_carousel();
+
+                    $(window).on('resize', function(){
+                        redraw_carousel();
+                    });
+                </script>
+                <div style="clear: both;"></div>
+            </div>
+
+        </div>
+
+</div>
+
+<div id="footer">
+    <div class="container">
+        <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+    </div>
+</div>
+<!-- /.container -->
+
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-transition.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-alert.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-modal.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-dropdown.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-scrollspy.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-tab.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-tooltip.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-popover.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-button.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-collapse.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-carousel.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-typeahead.js"></script>
+<script>
+        $(function(){
+
+            $('#myCarousel').carousel()
+        });
+</script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/holder.js"></script>
+</body>
+</html>

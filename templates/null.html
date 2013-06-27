@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Carousel Template &middot; Bootstrap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+<!-- Le styles -->
+<link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<style>
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+    /* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+    /* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+#footer {
+    background-color: #f5f5f5;
+}
+    /* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+    /* Custom page CSS
+    -------------------------------------------------- */
+    /* Not required for template or sticky footer method. */
+@media (max-width: 740px){
+    .modules{
+        float: none;
+    }
+}
+
+@media (min-width: 740px){
+    .modules{
+        float: right;
+    }
+}
+
+.container {
+    width: auto;
+    max-width: 1170px;
+}
+.container .credit {
+    margin: 20px 0;
+}
+.header{
+    min-height: 100px;
+    background: #2980b9;
+    padding: 0 25px;
+}
+.logo{
+    float: left;
+    height: 60px;
+    font-size: 32px;
+    margin-top: 20px;
+    line-height: 60px;
+    color: #F7F7F7;
+}
+.search_form{
+    float: right;
+    width: 260px;
+    margin-top: 30px;
+}
+.main-content{
+    width: 950px;
+    float: left !important;
+}
+.modules{
+    width: 200px;
+    word-wrap: break-word;
+    float: left !important;
+}
+.content{
+    padding: 0 25px;
+}
+    }
+</style>
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="../assets/ico/favicon.png">
+</head>
+
+<body>
+
+
+
+<!-- NAVBAR
+================================================== -->
+
+<div id="myCarousel" class="carousel slide" style="max-width:640px; max-height:320px;">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+        <div class="active item">
+            <img src="http://www.wonderoftech.com/wp-content/uploads/2012/02/Beautiful-Wallpaper-800x400.jpg" />
+            <div class="carousel-caption">
+                <h4>QWqwqw</h4>
+                <p>qwqwwqw</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="http://www.wallsave.com/wallpapers/800x400/monster-energy/204613/monster-energy-dc-logo-echostartr-com-204613.jpg" />
+            <div class="carousel-caption">
+                <h4>QWqwqw</h4>
+                <p>qwqwwqw</p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="http://amorescinema.net/wp-content/uploads/2012/03/Inception-wallpaper-1920x1200-2-800x400.jpg" />
+            <div class="carousel-caption">
+                <h4>QWqwqw</h4>
+                <p>qwqwwqw</p>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+<script type="text/javascript">
+    $('#myCarousel').carousel();
+</script>
+
+
+<!-- /.container -->
+
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-transition.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-alert.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-modal.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-dropdown.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-scrollspy.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-tab.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-tooltip.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-popover.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-button.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-collapse.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-carousel.js"></script>
+<script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-typeahead.js"></script>
+
+<script src="{{ STATIC_URL }}packages/bootstrap/js/holder.js"></script>
+</body>
+</html>

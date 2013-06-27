@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="ltr" lang="ru">
+<head>
+    <title>УлГУ</title>
+    <link href="/staticfiles/packages/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="/staticfiles/packages/bootstrap/jquery.js"></script>
+    <script type="text/javascript" src="/staticfiles/packages/ckeditor/ckeditor/ckeditor.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-button.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="/staticfiles/packages/bootstrap/js/bootstrap-typeahead.js"></script>
+</head>
+<body>
+<div id="maincontent">
+
+
+<div class="moduletable">
+<div align="center" width="100%">
+    {% if not mode %}
+    <a href="{{ node.path }}add/"><img alt="Компонент" ext:qtip="Добавить Компонент, дочерний к этому документу" src="http://www.ulsu.ru/components/com_dprtmnt/i/new_com.png"/></a>
+    {% endif %}
+    {% block topmenu %}
+
+    {% endblock %}
+    <br/>
+    <br/>
+    <div id="link_app" style="display:none">
+        <input id="link_app_input" size="90" type="text" value="http://www.ulsu.ru/index.php?option=com_dprtmnt&Itemid=33&id=1">
+    </div>
+    <br/>
+    <div id="mov_app" style="display:none;">
+        <table border="0">
+            <tr>
+                <td>
+                    <form action="http://www.ulsu.ru/index.php?option=com_dprtmnt&amp;Itemid=33&amp;id=1&amp;lang=ru&amp;task=move" method="POST" name="movef">
+                        <select name="act" style="width:500px;font-size:12px;"></select><br/><input ext:qtip="Изменит вид URL. Рекомендуется не включать. При выключенной опции страничка будет доступна по старому URL адрессу. Для того чтобы изменения вступили в силу необходимо уведомить администратора сайта. " name="sefMove" type="checkbox"/>&nbsp;захватить
+                        с собою и SEF ветви<br/><div align="right" width="100%"><input type="submit" value="перенести"/></div></form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="del_app" style="display:none;">
+        <table border="0" padding=20>
+            <tr>
+                <td>
+                    <form action="http://www.ulsu.ru/index.php?option=com_dprtmnt&amp;Itemid=33&amp;id=1&amp;lang=ru&amp;task=delete" method="POST" name="delf">
+                        <input checked ext:qtip="При вырезании будет стёрта лишь эта страница, все дочерние разделы усыновятся родителем текущего раздела." name="act" type="radio" value="cut"/>Удалить
+                        страницу<br/>
+                        <input ext:qtip="Стирает всю ветвь - раздел вместе с дочерними подразделами." name="act" type="radio" value="del_brunch"/>Удалить
+                        всю ветвь<br/>
+                        <div align="right"><input type="submit" value="Удалить"/></div><br/><br/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+            {% if node.children %}
+                <table border="0" cellpadding="0" cellspacing="0" class="mRight">
+                    <tr>
+                        <td>
+                            {% for c in node.children %}
+                            <a href="{{ c.path }}">{{ c.title }}</a><br/>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
+            {% endif %}
+            {% if node.modules %}
+                <table border="0" cellpadding="0" cellspacing="0" class="mRight">
+                    {% for m in node.modules %}
+                    <table cellpadding="0" cellspacing="0" class="moduletable">
+                        <tr>
+                            <td>
+                                {{ m.data|safe }}
+                            </td>
+                        </tr>
+                    </table>
+                {% endfor %}
+            {% endif %}
+<ul class="breadcrumb">
+
+    {% for b in node.breadcrumbs_w_last %}
+        <li><a href="{{ b.path }}">{{ b.title }}</a></li>
+    {% if not forloop.last %}
+        <span class="divider">/</span>
+    {% endif %}
+    {% endfor %}
+</ul>
+</div>
+<h2><img align='bottom' alt='&gt;' class='arrow-h2' src='http://www.ulsu.ru/i/arrow-h2.gif'>&nbsp;{% if title %}{{ title }}{% else %}{{ node.title }}{% endif %}</h2>
+{% block content %}
+Нет
+{% endblock %}
+</div>
+</body>
+</html>

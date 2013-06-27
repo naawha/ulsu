@@ -1,0 +1,62 @@
+[33mcommit 64ba1bcac220d68e022e9397f382686b4a0ba91b[m
+Author: introx <q3introx@mail.ru>
+Date:   Tue Jun 25 13:07:02 2013 +0400
+
+    Рассортировал пакеты в папке staticfiles/packages
+
+[33mcommit 0f1f3def38fc00a66276a880c047a67acd82aad8[m
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Sat Jun 22 12:46:54 2013 +0400
+
+    Сделал модель History неизменяемой
+    Поправил сохранение департамента из админки
+
+[33mcommit c7dc4590463bac364db7e28e830e53dd5cafbdc1[m
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Sat Jun 22 03:25:32 2013 +0400
+
+    Сделал модель History нередактируемой
+    Поправил сохранение модели Department из админки
+
+[33mcommit 784e3b76c5edec984f65da4198bd7775024609b9[m
+Author: unknown <q3introx@mail.ru>
+Date:   Mon Jun 17 17:05:06 2013 +0400
+
+    Add departament
+
+[33mcommit 37d39799c2deda18f45ffc1453e9c0862b4d5bd0[m
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Mon Apr 8 05:50:15 2013 +0400
+
+    Add tree in node admin menu
+
+[33mcommit d84665a963cfcb22600cb48bf6839d08f2c939ec[m
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Sun Mar 31 12:14:06 2013 +0400
+
+    Add *.db to gitignore
+
+[33mcommit 285a316bf0db51a5f6e1af7caba640ba0d2ededf[m
+Merge: 21b90e0 e562ccf
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Sat Mar 30 21:34:08 2013 +0400
+
+    Merge branch 'master' of https://github.com/naawha/ulsu
+
+[33mcommit 21b90e050a06e35fb06a22287732b34522a03e87[m
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Sat Mar 30 21:33:08 2013 +0400
+
+    Another commit
+
+[33mcommit e562ccfc52ffb6d4e52cc671732b323ab59dadf0[m
+Author: naawha <naawha@gmail.com>
+Date:   Sat Mar 30 19:44:42 2013 +0400
+
+    Update README
+
+[33mcommit caa4efd5e4e14b0930dd770ec61d6263318892f4[m
+Author: Ivan Silin <naawha@gmail.com>
+Date:   Sat Mar 30 19:06:45 2013 +0400
+
+    Startup init
