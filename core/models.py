@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
@@ -73,10 +74,10 @@ admin.site.register(Timetable, TimetableAdmin)
 
 
 class Node(InheritanceCastModel):
-    parent = models.ForeignKey('Node', blank=True, null=True)
-    node_name = models.CharField(max_length=30)
-    title = models.CharField(max_length=255)
-    creator = models.ForeignKey(User)
+    parent = models.ForeignKey('Node', blank=True, null=True, verbose_name='Родительский узел')
+    node_name = models.CharField(max_length=30, verbose_name='Имя узла')
+    title = models.CharField(max_length=255, verbose_name='Заголовок страницы')
+    creator = models.ForeignKey(User, verbose_name='Создатель', editable=False)
 
     def path(self):
         if self.parent is not None:
@@ -118,7 +119,16 @@ class Node(InheritanceCastModel):
     def __unicode__(self):
         return self.path()
 
+    def save(self, user, *args, **kwagrs):
+        if not self.pk:
+            self.creator = user
+        super(Node, self).save(*args, **kwagrs)
 
 class NodeAdmin(admin.ModelAdmin):
+    readonly_fields = ('creator',)
     list_display = ('title', 'path')
+
+    def save_model(self, request, obj, form, change):
+        obj.save(request.user)
+
 admin.site.register(Node, NodeAdmin)

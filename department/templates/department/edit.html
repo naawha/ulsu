@@ -6,7 +6,9 @@
 {% endblock %}
 
 
-
+{% block js %}
+    <script src="{{ STATIC_URL }}js/csrf_ajax.js"></script>
+{% endblock %}
 
 {% block content %}
     <div class="text">
@@ -21,10 +23,8 @@
                 {{ node.text }}
             </textarea>
             <script type="text/javascript">
-                CKEDITOR.replace('editor',
-                        {
-                            skin : 'django'
-                        });
+                CKEDITOR.replace("editor", {"filebrowserWindowWidth": 940, "width": 835, "skin": "django", "filebrowserWindowHeight": 725, "filebrowserBrowseUrl": "/ckeditor/browse/", "filebrowserUploadUrl": "/ckeditor/upload/", "toolbar": "Full", "height": 291});
+
             </script>
             <input type="submit" value="применить" ext:qtip="Применить — сохранить и остаться на странице редактирования"/>
         </form>
