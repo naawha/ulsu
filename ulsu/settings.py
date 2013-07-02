@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from local_settings import PROJECT_PATH, DATABASES
 from private_settings import SECRET_KEY
-import sys, os
+import os
 
 
 DEBUG = True
@@ -57,11 +57,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your staticfiles files
 # in apps' "staticfiles/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/staticfiles/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static'),
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 
 # URL prefix for staticfiles files.
 # Example: "http://example.com/staticfiles/", "http://staticfiles.example.com/"
-STATIC_URL = '/staticfiles/'
+STATIC_URL = '/static/'
 
 # Additional locations of staticfiles files
 STATICFILES_DIRS = (
