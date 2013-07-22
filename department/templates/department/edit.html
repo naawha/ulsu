@@ -1,4 +1,4 @@
-{% extends "main.html" %}
+{% extends "content.html" %}
 
 {% block topmenu %}
     <a href="{{ node.path }}"><img ext:qtip="Сохранить и перейти к просмотру страницы" alt="сохранить" src="http://www.ulsu.ru/components/com_dprtmnt/i/save.png"></a>
@@ -8,6 +8,7 @@
 
 {% block js %}
     <script src="{{ STATIC_URL }}js/csrf_ajax.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}packages/ckeditor/ckeditor/ckeditor.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -16,14 +17,14 @@
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
             <input type="checkbox" name="show_rightmenu" value="TRUE">Показывать правое меню<br />
             Заголовок
-            <input id="inp_ttl" type="text" ext:qtip="Название раздела" value="{{ node.head }}" size="70" name="head"><br />
+            <input id="inp_ttl" type="text" ext:qtip="Название раздела" value="{{ node.title }}" size="70" name="title"><br />
             Не отображать в меню
             <input type="checkbox" name="status" value="TRUE"><br />
             <textarea name="text" id="editor">
                 {{ node.text }}
             </textarea>
             <script type="text/javascript">
-                CKEDITOR.replace("editor", {"filebrowserWindowWidth": 940, "width": 835, "skin": "django", "filebrowserWindowHeight": 725, "filebrowserBrowseUrl": "/ckeditor/browse/", "filebrowserUploadUrl": "/ckeditor/upload/", "toolbar": "Full", "height": 291});
+                CKEDITOR.replace("editor", {"filebrowserWindowWidth": 940, "width": 950, "skin": "django", "filebrowserWindowHeight": 725, "filebrowserBrowseUrl": "/ckeditor/browse/", "filebrowserUploadUrl": "/ckeditor/upload/", "toolbar": "Full", "height": 291});
 
             </script>
             <input type="submit" value="применить" ext:qtip="Применить — сохранить и остаться на странице редактирования"/>

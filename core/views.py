@@ -18,7 +18,7 @@ index_node = Node.objects.filter(parent=None)[:1]
 def main_page(request):
     node = index_node
     node.title = 'Новости университета'
-    t = loader.get_template("stas.html")
+    t = loader.get_template("index.html")
     c = RequestContext(request, {'node': node})
     return HttpResponse(t.render(c))
 

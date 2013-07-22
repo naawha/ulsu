@@ -78,6 +78,9 @@ class Node(InheritanceCastModel):
     node_name = models.CharField(max_length=30, verbose_name='Имя узла')
     title = models.CharField(max_length=255, verbose_name='Заголовок страницы')
     creator = models.ForeignKey(User, verbose_name='Создатель', editable=False)
+    show_rightmenu = models.BooleanField(verbose_name='Отображать правое меню', help_text='В правом меню перечислены дочерние страницы')
+    rightmenu = models.TextField(null=True, blank=True, verbose_name='Содержимое правого меню', help_text='Если поле пустое, правое меню сгенерируется автоматически')
+    status = models.BooleanField(verbose_name='Скрыть страницу')
 
     def path(self):
         if self.parent is not None:
@@ -115,6 +118,17 @@ class Node(InheritanceCastModel):
         else:
             return '/get/' + str(self.id)
 
+    def style_rightmenu(self):
+        if self.show_rightmenu:
+            return '✓'
+        else:
+            return ''
+
+    def style_status(self):
+        if self.status:
+            return '✓'
+        else:
+            return ''
 
     def __unicode__(self):
         return self.path()

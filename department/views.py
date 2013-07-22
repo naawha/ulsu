@@ -14,7 +14,7 @@ def view(request, node):
 
 def edit(request, node):
     if request.method == 'POST':
-        node.head = request.POST['head']
+        node.title = request.POST['title']
         node.text = request.POST['text']
         node.status = 'status' in request.POST
         node.show_rightmenu = 'show_rightmenu' in request.POST

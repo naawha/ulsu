@@ -15,22 +15,7 @@ def get_node():
 
 
 class Department(Node):
-    show_rightmenu = models.BooleanField(verbose_name='Отображать правое меню', help_text='В правом меню перечислены дочерние страницы')
-    rightmenu = models.TextField(null=True, blank=True, verbose_name='Содержимое правого меню', help_text='Если поле пустое, правое меню сгенерируется автоматически')
-    status = models.BooleanField(verbose_name='Скрыть страницу')
     text = RichTextField(null=True, blank=True, verbose_name='Содержимое страницы')
-
-    def style_rightmenu(self):
-        if self.show_rightmenu:
-            return '✓'
-        else:
-            return ''
-
-    def style_status(self):
-        if self.status:
-            return '✓'
-        else:
-            return ''
 
     def save(self, user, *args, **kwagrs):
         super(Department, self).save(user, *args, **kwagrs)
@@ -42,7 +27,7 @@ class Department(Node):
             h.save()
 
     class Meta:
-        verbose_name='Департамент'
+        verbose_name='department'
         verbose_name_plural='Департаменты'
 
 

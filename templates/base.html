@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Carousel Template &middot; Bootstrap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+<!-- Le styles -->
+<link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+{% block  js%}
+{% endblock %}
+<style>
+html,
+body {
+    height: 100%;
+    font-family: "Verdana" !inherit;
+    /* The html and body elements cannot have any padding or margin. */
+}
+    /* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+    /* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+#footer {
+    background-color: #f5f5f5;
+}
+    /* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+.container {
+    width: auto;
+    max-width: 1170px;
+}
+.container .credit {
+    margin: 20px 0;
+}
+.header{
+    min-height: 150px;
+    background: #5fa3d0;
+    padding: 0 25px;
+}
+.logo{
+    float: left;
+    font-size: 32px;
+    color: #F7F7F7;
+    margin-top:15px;
+}
+.search_form{
+    float: right;
+    width: 200px;
+}
+.info-block{
+    margin-bottom: 20px;
+    margin-top: 60px;
+}
+.info-block a{
+    color: #fff;
+    text-decoration: none;
+    margin-right: 17px;
+}
+.info-block a:last-child{
+    margin-right: 0px;
+}
+.form-search .input-append .search-query{
+    width: 105px;
+    border-radius: 0px;
+}
+.form-search .input-append .btn{
+    border-radius: 0px;
+}
+
+{% comment %} меню{% endcomment %}
+.navbar{
+    margin-top: 4px;
+}
+.navbar-inner{
+    background-image: none !important;
+    background-color: #d4aa55 !important;
+    border: none;
+}
+.navbar .nav > li > a{
+    padding: 15px 15px;
+}
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+    background-color: #D8BF86;
+}
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus{
+    box-shadow: none;
+}
+.navbar-inverse .brand, .navbar-inverse .nav > li > a{
+    color: #fff;
+    text-shadow: none;
+}
+.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav > li > a:hover {
+    background-color: transparent;
+    background-color: #D8BF86;
+}
+.navbar-inverse .nav li.dropdown > .dropdown-toggle .caret{
+    border-bottom-color: #fff;
+    border-top-color: #fff;
+}
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle{
+    background-color: #D8BF86;
+}
+.dropdown-menu{
+    border-radius: 3px;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #5fa3d0;
+    background-image: none;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+.navbar-inverse .btn-navbar{
+    background-color: #5FA3D0;
+    background-image: none;
+    border-radius: 0px;
+}
+.navbar-inverse .btn-navbar:hover, .navbar-inverse .btn-navbar:focus, .navbar-inverse .btn-navbar:active, .navbar-inverse .btn-navbar.active, .navbar-inverse .btn-navbar.disabled, .navbar-inverse .btn-navbar[disabled]{
+    background-color: #1e6cd0;
+}
+</style>
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="../assets/ico/favicon.png">
+</head>
+
+<body>
+<!-- NAVBAR
+================================================== -->
+<div id="wrap">
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <img style="margin-right: 40px;float:left;" src="{{ STATIC_URL }}img/logo.png">
+                <span style="min-width: 500px;display: block;float: left;line-height: 40px;margin-top: 20px;">Ульяновский государственный<br /> университет</span>
+                <span style="font-size:22px; display: block;float: left;line-height: 40px;margin-top: 80px;">Классический выбор</span>
+            </div>
+            <div class="search_form">
+                <div class="info-block">
+                    <a href=""><img src="{{ STATIC_URL }}img/atom.png"></a>
+                    <a href=""><img src="{{ STATIC_URL }}img/start.png"></a>
+                    <a href="#">RSS</a>
+                    <a href="#">Wi-Fi</a>
+                    <a href="#">ENG</a>
+                </div>
+                <form class="form-search">
+                    <div class="input-append">
+                        <input type="text" class="span2 search-query">
+                        <button class="btn" type="submit">Найти</button>
+                    </div>
+                </form>
+            </div>
+            <div style="clear: both">
+            </div>
+        </div>
+    </div>
+    {% comment %}------------MENU----------------------------------{% endcomment %}
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="nav-collapse in collapse" style="height: auto;">
+                    <ul class="nav">
+                        <li class="active"><a href="#">Новости</a></li>
+                        <li><a href="#about">Студентам</a></li>
+                        <li><a href="#contact">Выпускникам</a></li>
+                        <li><a href="#contact">Сотрудникам</a></li>
+                        <li><a href="#contact">Подразделения</a></li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Информация <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Об университете</a></li>
+                                <li><a href="#">Образовательные программы</a></li>
+                                <li><a href="#">Международное сотрудничество</a></li>
+                                <li class="divider"></li>
+                                <li class="nav-header">Nav header</li>
+                                <li><a href="#">Социальная политика</a></li>
+                                <li><a href="#">Довузовское образование</a></li>
+                                <li><a href="#">Система менеджмента качества </a></li>
+                                <li><a href="#">Школы-партнёры</a></li>
+                                <li><a href="#">Сотрудничество</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Обратная связь <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Гостевая книга</a></li>
+                                <li><a href="#">Задать вопрос</a></li>
+                                <li><a href="#">Контакты</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form pull-right">
+                        {% comment %}<button class="btn btn-mini" type="button">Войти</button>{% endcomment %}
+                        <a href="#" style="display: inline-block; margin-top: 15px; color: #F7F7F7;">Log in</a>
+                    </form>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    {% comment %}---------------CONTENT-------------------------------{% endcomment %}
+
+    {% block main%}
+    {% endblock %}
+
+    {% block dep%}
+    {% endblock %}
+
+    {% comment %}---------------END CONTENT-------------------------------{% endcomment %}
+    <div id="footer">
+        <div class="container">
+            <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+        </div>
+    </div>
+    <!-- Le javascript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-button.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-typeahead.js"></script>
+    <script>
+        $(function(){
+            $('#myCarousel').carousel()
+        });
+    </script>
+    <script src="{{ STATIC_URL }}packages/bootstrap/js/holder.js"></script>
+</body>
+</html>

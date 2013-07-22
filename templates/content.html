@@ -1,0 +1,135 @@
+{% extends "base.html"%}
+{% load static %}
+
+
+{% block  js%}
+    <style>
+    @media (max-width: 740px){
+        .modules{
+            float: none;
+        }
+    }
+    @media (min-width: 740px){
+        .modules{
+            float: right;
+        }
+    }
+    .main-content{
+        width: 950px;
+        float: left !important;
+    }
+    .modules{
+        padding: 10px 0px 10px 20px;
+        word-wrap: break-word;
+        float: left !important;
+        width: 200px;
+        background-color: #ffffbe;
+    }
+    .modules h5{
+        font-size: 12px;
+    }
+    .content{
+        padding: 0 25px;
+    }
+    .carousel{
+        max-width: 890px;
+    }
+    .modules-list{
+        margin: 0;
+    }
+    .modules-list li{
+        display: block;
+        width: 200px;
+        margin-bottom: 5px;
+    }
+
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+{% endblock %}
+
+    {% block dep %}
+    {% comment %}---------------CONTENT-------------------------------{% endcomment %}
+    <div class="content">
+        <div class="container">
+            <div class="main-content">
+                <ul class="breadcrumb">
+
+                    {% for b in node.breadcrumbs_w_last %}
+                        <li><a href="{{ b.path }}">{{ b.title }}</a></li>
+                        {% if not forloop.last %}
+                            <span class="divider">/</span>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+            <div align="center" width="100%">
+                {% if not mode %}
+                    <a href="{{ node.path }}add/"><img alt="Компонент" ext:qtip="Добавить Компонент, дочерний к этому документу" src="http://www.ulsu.ru/components/com_dprtmnt/i/new_com.png"/></a>
+                {% endif %}
+                {% block topmenu %}
+
+                {% endblock %}
+            </div>
+                <h1>{% if title %}{{ title }}{% else %}{{ node.title }}{% endif %}</h1>
+                {% block content %}
+
+                {% endblock %}
+            </div>
+            <div class="modules">
+               {{ node.rightmenu|safe }}
+            </div>
+            <script>
+                function redraw(){
+                    var width;
+                    var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                    if (w < 740) {
+                        width = $('.container').width();
+                    } else {
+                        width = $('.container').width()-$('.modules').width()-20;
+                    }
+                    $('.main-content').width(width);
+                }
+
+                redraw();
+
+                $(window).on('resize', function(){
+                    redraw();
+                });
+                function redraw_carousel(){
+                    var width;
+                    var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                    if (w > 980) {
+                        width = $('#myCarousel').width()-250;
+                    } else {
+                        width = $('#myCarousel').width();
+                    }
+                    $('.carousel-image').width(width);
+                }
+
+                redraw_carousel();
+
+                $(window).on('resize', function(){
+                    redraw_carousel();
+                });
+            </script>
+            <div style="clear: both;"></div>
+
+        </div>
+
+    </div>
+    <div id="push"></div>
+</div>
+<!-- /.container -->
+{% endblock %}
