@@ -7,11 +7,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+{% block js %}
+
+{% endblock %}
 <!-- Le styles -->
 <link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-{% block  js%}
-{% endblock %}
+
 <style>
 html,
 body {
@@ -153,6 +155,7 @@ body {
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 <link rel="shortcut icon" href="../assets/ico/favicon.png">
+{% block css %}{% endblock %}
 </head>
 
 <body>

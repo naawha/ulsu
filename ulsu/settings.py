@@ -105,6 +105,7 @@ WSGI_APPLICATION = 'ulsu.wsgi.application'
 CUSTOM_APPS = (
     {'type': 'department', 'name': 'Подразделение'},
     {'type': 'newsfeed', 'name': 'Новости'},
+    {'type': 'guestbook', 'name': 'Гостевая книга'},
 )
 
 TEMPLATE_DIRS = (

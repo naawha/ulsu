@@ -1,0 +1,53 @@
+{% extends "content.html" %}
+
+
+{% block topmenu %}
+<a href="{{ node.path }}edit"><img ext:qtip="Редактировать этот раздел" alt="править" src="http://www.ulsu.ru/components/com_dprtmnt/i/edit.png"></a>
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/csrf_ajax.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+$('.delete_link').click(function(){
+        elem = $(this);
+        $.ajax({
+            url: 'delete/',
+            type: 'POST',
+            data: { id: $('.delete_link').attr('id') },
+            success: function(){
+                elem.parent().parent().remove();
+            }
+        })
+})
+})
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="link">
+    <a href="add_message/">Добавить сообщение</a>
+</div>
+<div class="text">
+    {% for r in records %}
+        <div style="border: 1px #5FA3D0 solid; margin-top: 10px;padding: 10px;">
+            <div style="float: right;">
+                <a href="#" id="{{ r.id }}" class="confirm_link">Утвердить</a>
+                <a href="#" id="{{ r.id }}" class="delete_link">Удалить</a>
+            </div>
+            
+            <div style="font-weight: bold;">{{ r.message_name }}</div>
+            <div style="margin-top:5px;">{{ r.message_text }}</div>
+            <div style="float: right;">
+                <div style="float: right">&lt<span style="color: #5FA3D0;">{{ r.author_email }}</span>&gt </div>
+                <div style="clear: both;"></div>                
+                <div>{{ r.message_date }}</div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "content.html" %}
+
+{% block topmenu %}
+<a href="{{ node.path }}edit"><img ext:qtip="Редактировать этот раздел" alt="править" src="http://www.ulsu.ru/components/com_dprtmnt/i/edit.png"></a>
+{% endblock %}
+
+
+{% block content %}
+<div class="text">
+    <h3>Добавить сообщение</h3>
+    <form action="save/" method="POST">
+        E-mail
+        <div>
+            <input type="text" name="author" style="width: 400px;"/>
+        </div>
+        Заголовок
+        <div>
+            <input type="text" name="mname" style="width: 400px;"/>
+        </div>
+        Сообщение
+        <div>
+            <textarea name="mtext" style="width: 400px; height: 300px;"></textarea>
+        </div>
+        
+        <input type="submit" value="Отправить"/>
+        {% csrf_token %}
+    </form>
+</div>
+
+{% endblock %}
