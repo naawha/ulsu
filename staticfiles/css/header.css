@@ -1,0 +1,64 @@
+html,
+body {
+    height: 100%;
+    font-family: "Verdana" !inherit;
+
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    margin: 0 auto -60px;
+}
+
+.header{
+    min-height: 150px;
+    background: #5fa3d0;
+    padding: 0 25px;
+}
+
+.container {
+    width: auto;
+    max-width: 1170px;
+}
+
+.container .credit {
+    margin: 20px 0;
+}
+
+.logo{
+    float: left;
+    font-size: 32px;
+    color: #F7F7F7;
+    margin-top:15px;
+}
+
+.search_form{
+    float: right;
+    width: 200px;
+}
+
+.info-block{
+    margin-bottom: 20px;
+    margin-top: 60px;
+}
+
+.info-block a{
+    color: #fff;
+    text-decoration: none;
+    margin-right: 17px;
+}
+
+.info-block a:last-child{
+    margin-right: 0px;
+}
+
+.form-search .input-append .search-query{
+    width: 105px;
+    border-radius: 0px;
+}
+
+.form-search .input-append .btn{
+    border-radius: 0px;
+}
+

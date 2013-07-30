@@ -1,18 +1,9 @@
-{% extends "base.html" %}
+{% extends "content.html" %}
 {% load static %}
 
-{% block js %}
+{% block css %}
 <style>
-@media (max-width: 740px){
-    .modules{
-        float: none;
-    }
-}
-@media (min-width: 740px){
-    .modules{
-        float: right;
-    }
-}
+
 .main-content{
         width: 950px;
         float: left !important;
@@ -29,7 +20,9 @@
         margin-bottom: 40px;
         max-width: 890px;
     }
-
+#myCarousel .carousel{
+    margin: 0 auto !important;
+}
 .news-list{
     margin-left:0px;
 }
@@ -90,13 +83,10 @@
 <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
     <![endif]-->
-{% endblock js %}
+{% endblock %}
 
-{% block main %}
+{% block content %}
     {% comment %}---------------CONTENT-------------------------------{% endcomment %}
-        <div class="content">
-            <div class="container">
-                <div class="main-content">
                     <div class="carousel slide" id="myCarousel">
                         <ol class="carousel-indicators">
                             <li class="" data-slide-to="0" data-target="#myCarousel"></li>
@@ -173,11 +163,11 @@
                 </div>
                 <div class="modules">
                     <ul class="modules-list">
-                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/holidays/prkm.jpg" alt="УлГУ ТВ""></a></li>
-                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/razvitie_ulsu.png" alt="УлГУ ТВ""></a></li>
-                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/prog_stud_ulsu.png" alt="УлГУ ТВ""></a></li>
-                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/ulsutv.png" alt="УлГУ ТВ""></a></li>
-                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/holidays/reiting.gif" alt="УлГУ ТВ""></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/holidays/prkm.jpg" alt="УлГУ ТВ"></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/razvitie_ulsu.png" alt="УлГУ ТВ"></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/prog_stud_ulsu.png" alt="УлГУ ТВ"></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/ulsutv.png" alt="УлГУ ТВ"></a></li>
+                        <li><a href="#"><img border="0" src="http://www.ulsu.ru/i/holidays/reiting.gif" alt="УлГУ ТВ"></a></li>
                     </ul>
                 </div>
                 <script>
@@ -217,9 +207,4 @@
                     });
                 </script>
                 <div style="clear: both;"></div>
-            </div>
-
-        </div>
-    <div id="push"></div>
-</div>
 {% endblock %}

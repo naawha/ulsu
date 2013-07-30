@@ -1,0 +1,46 @@
+@media (max-width: 740px){
+        .modules{
+            float: none;
+        }
+}
+
+@media (min-width: 740px){
+        .modules{
+            float: right;
+        }
+}
+
+.main-content{
+    width: 950px;
+    float: left !important;
+}
+
+.modules{
+    word-wrap: break-word;
+    float: left !important;
+    width: 200px;
+    background-color: #ffffbe;
+    margin-left: 20px;
+}
+
+.modules h5{
+    font-size: 12px;
+}
+
+.content{
+    padding: 0 25px;
+}
+
+.carousel{
+    max-width: 890px;
+}
+
+.modules-list{
+    margin: 0;
+}
+    
+.modules-list li{
+    display: block;
+    width: 200px;
+    margin-bottom: 5px;
+}

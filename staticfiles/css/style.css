@@ -628,3 +628,7 @@ a#toggle:active {
 #termsofuse {
     margin-left: 10px;
 }
+
+.clear{
+    clear: both;
+}
