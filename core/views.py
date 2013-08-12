@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.template import loader, Context, RequestContext, Template
 from django.contrib.contenttypes.models import ContentType
+from django.contrib import auth
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -114,3 +115,20 @@ def node_tree(request):
 custom = (
     (re.compile(r'^add$'), add, 'add'),
 )
+
+@csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
+        if user:
+            auth.login(request, user)
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+    else:
+        raise Http404
+    
+def logout(request):
+    auth.logout(request)
+    return HttpResponse(1)
+     

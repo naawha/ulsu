@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"></script>
+    <script src="{{ STATIC_URL }}js/csrf_ajax.js"></script>
 
     <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-transition.js"></script>
     <script src="{{ STATIC_URL }}packages/bootstrap/js/bootstrap-alert.js"></script>
@@ -26,7 +27,7 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
-        $('.login_btn').click(function(){
+        $('#login_button').click(function(){
             $('.modal').modal();
             return false;
         })
@@ -74,6 +75,31 @@
     
     </script>
 
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#login_btn').click(function(){
+            $.ajax({
+                url: 'accounts/login/',
+                type: 'POST',
+                data: {'username': $('#username').val() ,'password': $('#password').val()},
+                success: function(data){
+                    if( data == 1) location.reload();
+                        else $('#login_error').text("Неверные данные!");
+                }
+            })
+        })
+        
+        $('#logout_btn').click(function(){
+            $.ajax({
+                url: 'accounts/logout/',
+                success: function(data){
+                    if( data == 1) location.reload();
+                }
+            })
+        })
+    })
+    </script>
+    
     <link rel="shortcut icon" href="../assets/ico/favicon.png">
     
     <link href="{{ STATIC_URL }}packages/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -173,22 +199,27 @@
                     </div>
                     <div class="modal-body">
                         <form action="" method="POST">
+                            <div style="margin: 0 auto;width: 300px;color: red;" id="login_error"></div>
                             <div style="margin: 0 auto;width: 300px;">
                                 Логин: 
-                                <input type="text" style="width: 300px;" name="login"/>
+                                <input type="text" style="width: 300px;" name="username" id="username"/>
                                 Пароль: 
-                                <input type="text" style="width: 300px;" name="pass"/>
+                                <input type="password" style="width: 300px;" name="password" id="password"/>
                             </div>
                             <div style="margin: 0 auto; width: 50px;">
-                                <input type="submit" value="Войти" />
+                                <input type="button" value="Войти" id="login_btn"/>
                             </div>
+                            {% csrf_token %}
                         </form>
                     </div>
                     </div>
 
                     <form class="navbar-form pull-right">
-                        {% comment %}<button class="btn btn-mini" type="button">Войти</button>{% endcomment %}
-                        <a href="#" style="display: inline-block; margin-top: 15px; color: #F7F7F7;" class="login_btn">Log in</a>
+                        {% if not user.is_anonymous %}
+                        {{ user.username }} <a href="#" style="display: inline-block; margin-top: 15px; color: #F7F7F7;" id="logout_btn">Выход</a>
+                        {% else %}
+                        <a href="#" style="display: inline-block; margin-top: 15px; color: #F7F7F7;" id="login_button">Вход</a>
+                        {% endif %}
                     </form>
                 </div>
             </div>
